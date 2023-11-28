@@ -1,0 +1,26 @@
+The most relevant columns are CONTENT and CLASS. The CONTENT column will be used as the input for your Bag of Words model, and the CLASS column will serve as the target variable for the Naive Bayes classifier.
+
+Spam vs. Non-Spam Comments Count:
+
+Spam Comments (Class = 1): 175
+Non-Spam Comments (Class = 0): 175
+The dataset is evenly balanced between spam and non-spam comments.
+Sample Spam Comments:
+
+"Hi everyone! My dream is to have passionate se..."
+"VOTE FOR KATY FOR THE EMAs! #KATYCATS http://..."
+"Hey guys. I am a very small YouTuber I upload ..."
+"Katy has the voice of gold. this video really ..."
+"Please help me give my son a grave. http://ww..."
+Sample Non-Spam Comments:
+
+"She is a perfect wonder.....﻿"
+"It should be illegal to be this goodlooking as..."
+"ROAAAAARRRRRR 🐯🐯🐯﻿"
+"Nice song﻿"
+"Your going to hear me Roar !!!! :-)))) #soun..."
+General Statistics:
+
+Total Comments: 350
+Unique Authors: 342
+Comments with Date: 350 (All comments have a date)
