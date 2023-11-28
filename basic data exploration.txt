@@ -1,4 +1,4 @@
-The most relevant columns are CONTENT and CLASS. The CONTENT column will be used as the input for your Bag of Words model, and the CLASS column will serve as the target variable for the Naive Bayes classifier.
+The most relevant columns are CONTENT and CLASS. The CONTENT column will be used as the input for our Bag of Words model, and the CLASS column will serve as the target variable for the Naive Bayes classifier.
 
 Spam vs. Non-Spam Comments Count:
 
