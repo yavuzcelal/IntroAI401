@@ -14,13 +14,40 @@ Sample Spam Comments:
 "Please help me give my son a grave. http://ww..."
 Sample Non-Spam Comments:
 
-"She is a perfect wonder.....﻿"
+"She is a perfect wonder....."
 "It should be illegal to be this goodlooking as..."
-"ROAAAAARRRRRR 🐯🐯🐯﻿"
-"Nice song﻿"
+"ROAAAAARRRRRR 🐯🐯🐯"
+"Nice song"
 "Your going to hear me Roar !!!! :-)))) #soun..."
 General Statistics:
 
 Total Comments: 350
 Unique Authors: 342
 Comments with Date: 350 (All comments have a date)
+
+
+Text Data Transformation Highlights (requirement 4)
+
+Data Transformation Using NLTK and CountVectorizer
+
+We applied the NLTK toolkit for preprocessing the text data in the CONTENT column
+of our dataset. This preprocessing involved tokenizing the text data into individual
+words. Following this, we used CountVectorizer from the sklearn library to
+transform this preprocessed text data into a numerical format, creating a bag-of-words
+model
+
+Highlights
+Data Shape:
+dataset consists of 350 comments, each represented by 1734 distinct features.
+These features represent the unique words extracted from the comments.
+The shape of this transformed data is critical as it shows the dimensionality of
+our dataset in terms of the number of documents (comments) and the number of
+unique words (features).
+
+Sample Feature Names:
+The first ten feature names from our bag-of-words model are: '00', '000', '002',
+'018', '04', '053012', '0cb8qfjaa', '0d878a889c', 
+'0dbhjzdw0lbsjbi40gxm0d0p5krhv8xinqli53__wqbahs8zx4mjhw5vwrkpxfoeks', '0laviqu2b'.
+These feature names represent some of the vocabulary that has been extracted
+from our text data. They are indicative of the diverse range of words present
+in the comments.
