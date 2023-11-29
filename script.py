@@ -4,6 +4,7 @@ Spyder Editor
 
 This is a temporary script file.
 """
+import os
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
@@ -15,10 +16,13 @@ import pandas as pd
 nltk.download('punkt')
 
 # Loadingthe data from the provided CSV file
-data = pd.read_csv('KatyPerry.csv')
+path='C:/Users/kesha/OneDrive/Desktop/Semester1/Introduction to AI/project/IntroAI401'
+filename = 'KatyPerry.csv'
+fullpath = os.path.join(path,filename)
+data = pd.read_csv(fullpath)
 
 # Display the first few rows of the dataframe to understand its structure
-data.head()
+print(data.head())
 
 # Basic data exploration
 
@@ -58,7 +62,17 @@ print("Data Shape (Bag-of-Words):", content_bow_nltk.shape)
 print("Feature Names Sample (Bag-of-Words):", vectorizer.get_feature_names_out()[:10])
 
 
-# requirement 5 STARTED BUT INCOMPLETE
+# requirement 5 
 # applying tf-idf transformation
 tfidf_transformer = TfidfTransformer()
 content_tfidf = tfidf_transformer.fit_transform(content_bow_nltk)
+
+# Displaying the shape of the TF-IDF matrix
+print("Data Shape (TF-IDF):", content_tfidf.shape)
+
+# Print a sample TF-IDF
+print("(TF-IDF):", content_tfidf[:10])
+
+# requirement 6
+# Shuffle the dataset
+df_shuffled_data = data.sample(frac=1, random_state=42)
