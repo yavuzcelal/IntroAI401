@@ -4,25 +4,23 @@ Spyder Editor
 
 This is a temporary script file.
 """
-import os
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 import pandas as pd
+from sklearn.naive_bayes import MultinomialNB
+
 
 # download the punkt tokenizer model (for requirements 3 & 4)
 nltk.download('punkt')
 
 # Loadingthe data from the provided CSV file
-path='C:/Users/kesha/OneDrive/Desktop/Semester1/Introduction to AI/project/IntroAI401'
-filename = 'KatyPerry.csv'
-fullpath = os.path.join(path,filename)
-data = pd.read_csv(fullpath)
+data = pd.read_csv('KatyPerry.csv')
 
 # Display the first few rows of the dataframe to understand its structure
-print(data.head())
+data.head()
 
 # Basic data exploration
 
@@ -76,3 +74,27 @@ print("(TF-IDF):", content_tfidf[:10])
 # requirement 6
 # Shuffle the dataset
 df_shuffled_data = data.sample(frac=1, random_state=42)
+
+# requirement 7
+# Splitting the dataset into 75% training and 25% testing
+train_size = int(0.75 * len(df_shuffled_data))
+train_data = df_shuffled_data[:train_size]
+test_data = df_shuffled_data[train_size:]
+
+# Separate the class from the features
+X_train_raw = train_data['CONTENT']
+y_train = train_data['CLASS']
+X_test_raw = test_data['CONTENT']
+y_test = test_data['CLASS']
+
+# Applying NLTK preprocessing and CountVectorizer to training and testing sets
+X_train = X_train_raw.apply(nltk_preprocess)
+X_test = X_test_raw.apply(nltk_preprocess)
+X_train_tfidf = tfidf_transformer.fit_transform(vectorizer.fit_transform(X_train))
+X_test_tfidf = tfidf_transformer.transform(vectorizer.transform(X_test))
+
+# requirement 8
+# Initialize and fit the Naive Bayes classifier
+
+nb_classifier = MultinomialNB()
+nb_classifier.fit(X_train_tfidf, y_train)
