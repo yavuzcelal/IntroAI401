@@ -98,3 +98,17 @@ X_test_tfidf = tfidf_transformer.transform(vectorizer.transform(X_test))
 
 nb_classifier = MultinomialNB()
 nb_classifier.fit(X_train_tfidf, y_train)
+
+# requirement 9
+# Cross validate the model on the training data using 5-fold and print the mean results of model accuracy
+scores = cross_val_score(nb_classifier, X_train_tfidf, y_train, cv=5)
+print("Mean accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
+
+# requirement 10
+# Test the model on the test data, print the confusion matrix and the accuracy of the model
+predictions = nb_classifier.predict(X_test_tfidf)
+conf_matrix = confusion_matrix(y_test, predictions)
+
+print("Confusion Matrix:")
+print(conf_matrix)
+print("Accuracy:", accuracy_score(y_test, predictions))
