@@ -11,6 +11,8 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 import pandas as pd
 from sklearn.naive_bayes import MultinomialNB
+from sklearn.model_selection import cross_val_score
+from sklearn.metrics import confusion_matrix, accuracy_score
 
 
 # download the punkt tokenizer model (for requirements 3 & 4)
@@ -38,7 +40,7 @@ total_comments = len(data)
 unique_authors = data['AUTHOR'].nunique()
 comments_with_date = data['DATE'].notnull().sum()
 
-spam_count, spam_comments_sample, non_spam_comments_sample, total_comments, unique_authors, comments_with_date
+print(f'spam_count:{spam_count}, spam_comments_sample:{spam_comments_sample},non_spam_comments_sample:{non_spam_comments_sample}, total_comments:{total_comments}, unique_authors{unique_authors}, comments_with_date:{comments_with_date}')
 
 # requirement 3
 # NLTK preprocessing function
@@ -98,3 +100,58 @@ X_test_tfidf = tfidf_transformer.transform(vectorizer.transform(X_test))
 
 nb_classifier = MultinomialNB()
 nb_classifier.fit(X_train_tfidf, y_train)
+
+# Step 9: Cross-validation on the training data
+# Assuming 'nb_classifier' is your trained Naive Bayes classifier
+
+# Convert the TF-IDF matrix to an array for cross-validation
+X_train_array = X_train_tfidf.toarray()
+
+# Perform 5-fold cross-validation
+cv_scores = cross_val_score(nb_classifier, X_train_array, y_train, cv=5)
+
+# Print the mean accuracy across folds
+print("Mean Cross-Validation Accuracy:", cv_scores.mean())
+
+# Step 10: Evaluate the model on the test data
+
+# Predictions on the test set
+y_pred = nb_classifier.predict(X_test_tfidf)
+
+# Confusion Matrix
+conf_matrix = confusion_matrix(y_test, y_pred)
+print("Confusion Matrix:")
+print(conf_matrix)
+
+# Accuracy on the test set
+test_accuracy = accuracy_score(y_test, y_pred)
+print("Test Accuracy:", test_accuracy)
+
+
+# Example comments
+comments = [
+    "I really enjoyed reading this article. It provided valuable insights and information.",
+    "The product quality is excellent, and the customer service is top-notch.",
+    "This song has been on repeat for days. Can't get enough of it!",
+    "The weather today is perfect for a relaxing outdoor picnic with friends.",
+    "Click here for a chance to win a free iPhone! Limited time offer!",
+    "Make thousands of dollars from home with this easy money-making method. Join now!",
+]
+
+# Preprocess the comments
+preprocessed_comments = [nltk_preprocess(comment) for comment in comments]
+
+# Vectorize and transform using CountVectorizer and TF-IDF transformer
+comments_tfidf = tfidf_transformer.transform(vectorizer.transform(preprocessed_comments))
+
+# Make predictions
+predictions = nb_classifier.predict(comments_tfidf)
+
+# Display the results
+for comment, prediction in zip(comments, predictions):
+    print(f"Comment: {comment}")
+    print(f"Predicted Class: {'Spam' if prediction == 1 else 'Non-Spam'}")
+    print("\n" + "-"*40 + "\n")
+
+
+
