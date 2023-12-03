@@ -130,12 +130,12 @@ print("Test Accuracy:", test_accuracy)
 
 # Example comments
 comments = [
-    "I really enjoyed reading this article. It provided valuable insights and information.",
-    "The product quality is excellent, and the customer service is top-notch.",
-    "This song has been on repeat for days. Can't get enough of it!",
-    "The weather today is perfect for a relaxing outdoor picnic with friends.",
-    "Click here for a chance to win a free iPhone! Limited time offer!",
-    "Make thousands of dollars from home with this easy money-making method. Join now!",
+    "I really enjoyed reading this article. It provided valuable insights and information.", #non-spam
+    "The product quality is excellent, and the customer service is top-notch.",#non-spam
+    "This song has been on repeat for days. Can't get enough of it!",#non-spam
+    "The weather today is perfect for a relaxing outdoor picnic with friends.",#non-spam
+    "Click here for a chance to win a free iPhone! Limited time offer!",#spam
+    "Make thousands of dollars from home with this easy money-making method. Join now!",#spam
 ]
 
 # Preprocess the comments
