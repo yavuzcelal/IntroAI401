@@ -40,7 +40,7 @@ total_comments = len(data)
 unique_authors = data['AUTHOR'].nunique()
 comments_with_date = data['DATE'].notnull().sum()
 
-print(f'spam_count:{spam_count}, spam_comments_sample:{spam_comments_sample},non_spam_comments_sample:{non_spam_comments_sample}, total_comments:{total_comments}, unique_authors{unique_authors}, comments_with_date:{comments_with_date}')
+print(f'\nspam_count:{spam_count}, \n\nspam_comments_sample:{spam_comments_sample},\n\nnon_spam_comments_sample:{non_spam_comments_sample}, \n\ntotal_comments:{total_comments}, \n\nunique_authors{unique_authors}, \n\ncomments_with_date:{comments_with_date}')
 
 # requirement 3
 # NLTK preprocessing function
@@ -58,8 +58,8 @@ content_bow_nltk = vectorizer.fit_transform(preprocessed_content)
 # requirement 4
 # highlights of countvectorizer output
 # printing the shape of countvectorizer output and a handful of feature names from countvectorizer
-print("Data Shape (Bag-of-Words):", content_bow_nltk.shape)
-print("Feature Names Sample (Bag-of-Words):", vectorizer.get_feature_names_out()[:10])
+print("\nData Shape (Bag-of-Words):", content_bow_nltk.shape)
+print("\nFeature Names Sample (Bag-of-Words):", vectorizer.get_feature_names_out()[:10])
 
 
 # requirement 5 
@@ -68,10 +68,10 @@ tfidf_transformer = TfidfTransformer()
 content_tfidf = tfidf_transformer.fit_transform(content_bow_nltk)
 
 # Displaying the shape of the TF-IDF matrix
-print("Data Shape (TF-IDF):", content_tfidf.shape)
+print("\nData Shape (TF-IDF):", content_tfidf.shape)
 
 # Print a sample TF-IDF
-print("(TF-IDF):", content_tfidf[:10])
+print("\n(TF-IDF):", content_tfidf[:10])
 
 # requirement 6
 # Shuffle the dataset
@@ -111,7 +111,7 @@ X_train_array = X_train_tfidf.toarray()
 cv_scores = cross_val_score(nb_classifier, X_train_array, y_train, cv=5)
 
 # Print the mean accuracy across folds
-print("Mean Cross-Validation Accuracy:", cv_scores.mean())
+print("\nMean Cross-Validation Accuracy:", cv_scores.mean())
 
 # Step 10: Evaluate the model on the test data
 
@@ -120,12 +120,12 @@ y_pred = nb_classifier.predict(X_test_tfidf)
 
 # Confusion Matrix
 conf_matrix = confusion_matrix(y_test, y_pred)
-print("Confusion Matrix:")
+print("\nConfusion Matrix:")
 print(conf_matrix)
 
 # Accuracy on the test set
 test_accuracy = accuracy_score(y_test, y_pred)
-print("Test Accuracy:", test_accuracy)
+print("\nTest Accuracy:", test_accuracy)
 
 
 # Example comments
@@ -152,6 +152,3 @@ for comment, prediction in zip(comments, predictions):
     print(f"Comment: {comment}")
     print(f"Predicted Class: {'Spam' if prediction == 1 else 'Non-Spam'}")
     print("\n" + "-"*40 + "\n")
-
-
-
